@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.jqmkj.java.common.config.CacheConfiguration,\
+  com.jqmkj.java.common.config.MetricsConfiguration,\
+  com.jqmkj.java.common.config.SecurityConfiguration,\
+  com.jqmkj.java.common.config.WebConfigurer

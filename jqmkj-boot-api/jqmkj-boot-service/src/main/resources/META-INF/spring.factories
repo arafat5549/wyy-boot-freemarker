@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.jqmkj.java.common.config.AsyncConfiguration,\
+com.jqmkj.java.common.config.LoggingAspectConfiguration
+#  com.jqmkj.java.common.config.FastJsonHttpMessageConvertersConfiguration

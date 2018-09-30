@@ -1,0 +1,19 @@
+package com.jqmkj.java.modules.sys.repository;
+
+import com.jqmkj.java.common.persistence.repository.TreeRepository;
+import com.jqmkj.java.modules.sys.domain.Module;
+
+import java.util.List;
+
+/**
+ * Spring Data JPA repository for the Authority entity.
+ */
+public interface ModuleRepository extends TreeRepository<Module, String> {
+
+    List<Module> findAllByStatusOrderBySort(Integer flagNormal);
+
+    Module findOneByParentIdOrderBySort(Integer parentId);
+
+    Module findFirstByParentIdAndStatusNot(String id, Integer flagDelete);
+
+}
