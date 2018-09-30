@@ -1,96 +1,4 @@
-/*
- Navicat Premium Data Transfer
-
- Source Server         : localhost
- Source Server Type    : MySQL
- Source Server Version : 50721
- Source Host           : localhost:3306
- Source Schema         : jqmkj-old
-
- Target Server Type    : MySQL
- Target Server Version : 50721
- File Encoding         : 65001
-
- Date: 07/08/2018 10:17:44
-*/
-
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
-
--- ----------------------------
--- Table structure for gen_scheme_t
--- ----------------------------
-DROP TABLE IF EXISTS `gen_scheme_t`;
-CREATE TABLE `gen_scheme_t`  (
-  `id_` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '编号',
-  `name_` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名称',
-  `category_` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '分类',
-  `view_type` char(2) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '视图类型 0  普通表格 1  表格采用ajax刷新',
-  `package_name` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '生成包路径',
-  `module_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '生成模块名',
-  `sub_module_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '生成子模块名',
-  `function_name` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '生成功能名',
-  `function_name_simple` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '生成功能名（简写）',
-  `function_author` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '生成功能作者',
-  `gen_table_id` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '生成表编号',
-
-  `status_` char(2) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0' COMMENT '状态 -2 已删除 -1停用 0 正常',
-  `version_` int(11) NULL DEFAULT 0 COMMENT '默认0，必填，离线乐观锁',
-  `description_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
-  `created_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `created_date` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
-  `last_modified_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `last_modified_date` timestamp(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`id_`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '生成方案' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of gen_scheme_t
--- ----------------------------
 INSERT INTO `gen_scheme_t` VALUES ('05bc9bf019d8480a902cf8b714a493db', '文件管理', 'curd', '0', 'com.jqmkj.java.modules', 'sys', '', '文件管理', '文件', 'admin', '34c0ae8ae28b4c66a78b95ab977a4529', '0', 0, '', '1', '2018-08-06 17:11:27', '1', '2018-08-06 17:11:27');
-
--- ----------------------------
--- Table structure for gen_table_column_t
--- ----------------------------
-DROP TABLE IF EXISTS `gen_table_column_t`;
-CREATE TABLE `gen_table_column_t`  (
-  `id_` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '编号',
-  `gen_table_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '归属表编号',
-  `name_` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名称',
-  `title_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `comments` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
-  `jdbc_type` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '列的数据类型的字节长度',
-  `java_type` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'JAVA类型',
-  `java_field` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'JAVA字段名',
-  `is_pk` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '是否主键',
-  `is_unique` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0' COMMENT '是否唯一（1：是；0：否）',
-  `is_null` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '是否可为空',
-  `is_insert` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '是否为插入字段',
-  `is_edit` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '是否编辑字段',
-  `is_list` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '是否列表字段',
-  `is_query` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '是否查询字段',
-  `query_type` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '查询方式（等于、不等于、大于、小于、范围、左LIKE、右LIKE、左右LIKE）',
-  `show_type` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '字段生成方案（文本框、文本域、下拉框、复选框、单选框、字典选择、人员选择、部门选择、区域选择）',
-  `dict_type` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '字典类型',
-  `settings` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '其它设置（扩展字段JSON）',
-  `sort_` decimal(10, 0) NULL DEFAULT NULL COMMENT '排序（升序）',
-
-  `status_` char(2) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0' COMMENT '状态 -2 已删除 -1停用 0 正常',
-  `version_` int(11) NULL DEFAULT 0 COMMENT '默认0，必填，离线乐观锁',
-  `description_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
-  `created_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `created_date` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
-  `last_modified_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `last_modified_date` timestamp(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`id_`) USING BTREE,
-  INDEX `gen_table_column_table_id`(`gen_table_id`) USING BTREE,
-  INDEX `gen_table_column_name`(`name_`) USING BTREE,
-  INDEX `gen_table_column_sort`(`sort_`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '业务表字段' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of gen_table_column_t
--- ----------------------------
 INSERT INTO `gen_table_column_t` VALUES ('1435fa28801742c3af0f90a0865b7a4d', '34c0ae8ae28b4c66a78b95ab977a4529', 'status_', 'status_', '', 'int(11)', 'Long', 'status', '0', '0', '1', '1', '0', '0', '0', 'eq', 'radio', 'sys_status', NULL, 100, '0', 0, NULL, '1', '2018-08-06 17:10:57', '1', '2018-08-06 17:10:57');
 INSERT INTO `gen_table_column_t` VALUES ('546e961b3a01439aa2c9240622575166', '34c0ae8ae28b4c66a78b95ab977a4529', 'created_date', 'created_date', '', 'timestamp', 'java.util.Date', 'createdDate', '0', '0', '0', '1', '0', '0', '0', 'eq', 'dateselect', '', NULL, 70, '0', 0, NULL, '1', '2018-08-06 17:10:57', '1', '2018-08-06 17:10:57');
 INSERT INTO `gen_table_column_t` VALUES ('55b6c91da26a40b4b50e9216818c3fab', '34c0ae8ae28b4c66a78b95ab977a4529', 'description_', 'description_', '', 'varchar(255)', 'String', 'description', '0', '0', '1', '1', '1', '0', '0', 'eq', 'textarea', '', NULL, 110, '0', 0, NULL, '1', '2018-08-06 17:10:57', '1', '2018-08-06 17:10:57');
@@ -103,117 +11,7 @@ INSERT INTO `gen_table_column_t` VALUES ('e5f691aee0df486289b2fb49a6fca78d', '34
 INSERT INTO `gen_table_column_t` VALUES ('f58a58d289bd474188b2199650ed4a45', '34c0ae8ae28b4c66a78b95ab977a4529', 'last_modified_date', 'last_modified_date', '', 'timestamp', 'java.util.Date', 'lastModifiedDate', '0', '0', '1', '1', '0', '0', '0', 'eq', 'dateselect', '', NULL, 90, '0', 0, NULL, '1', '2018-08-06 17:10:57', '1', '2018-08-06 17:10:57');
 INSERT INTO `gen_table_column_t` VALUES ('f63468296fe847a99e64269f0b332150', '34c0ae8ae28b4c66a78b95ab977a4529', 'type_', '类型', '', 'varchar(60)', 'String', 'type', '0', '0', '1', '1', '1', '1', '0', 'eq', 'input', '', NULL, 50, '0', 0, NULL, '1', '2018-08-06 17:10:57', '1', '2018-08-06 17:10:57');
 INSERT INTO `gen_table_column_t` VALUES ('ff8adf12dc084689b43cc4d727eafe2a', '34c0ae8ae28b4c66a78b95ab977a4529', 'last_modified_by', 'last_modified_by', '', 'varchar(50)', 'String', 'lastModifiedBy', '0', '0', '1', '1', '0', '0', '0', 'eq', 'input', '', NULL, 80, '0', 0, NULL, '1', '2018-08-06 17:10:57', '1', '2018-08-06 17:10:57');
-
--- ----------------------------
--- Table structure for gen_table_fk_t
--- ----------------------------
-DROP TABLE IF EXISTS `gen_table_fk_t`;
-CREATE TABLE `gen_table_fk_t`  (
-  `id_` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '编号',
-  `gen_table_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '归属表编号',
-  `name_` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名称',
-  `comments` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
-  `jdbc_type` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '列的数据类型的字节长度',
-  `java_type` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'JAVA类型',
-  `java_field` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'JAVA字段名',
-  `is_pk` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '是否主键',
-  `is_unique` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0' COMMENT '是否唯一（1：是；0：否）',
-  `is_null` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '是否可为空',
-  `is_insert` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '是否为插入字段',
-  `is_edit` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '是否编辑字段',
-  `is_list` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '是否列表字段',
-  `is_query` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '是否查询字段',
-  `query_type` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '查询方式（等于、不等于、大于、小于、范围、左LIKE、右LIKE、左右LIKE）',
-  `show_type` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '字段生成方案（文本框、文本域、下拉框、复选框、单选框、字典选择、人员选择、部门选择、区域选择）',
-  `dict_type` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '字典类型',
-  `settings` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '其它设置（扩展字段JSON）',
-  `sort_` decimal(10, 0) NULL DEFAULT NULL COMMENT '排序（升序）',
-  `status_` char(2) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0' COMMENT '状态 -2 已删除 -1停用 0 正常',
-  `version_` int(11) NULL DEFAULT 0 COMMENT '默认0，必填，离线乐观锁',
-  `description_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
-  `created_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `created_date` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
-  `last_modified_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `last_modified_date` timestamp(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`id_`) USING BTREE,
-  INDEX `gen_table_column_table_id`(`gen_table_id`) USING BTREE,
-  INDEX `gen_table_column_name`(`name_`) USING BTREE,
-  INDEX `gen_table_column_sort`(`sort_`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '业务表字段' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for gen_table_t
--- ----------------------------
-DROP TABLE IF EXISTS `gen_table_t`;
-CREATE TABLE `gen_table_t`  (
-  `id_` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '编号',
-  `name_` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名称',
-  `comments` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
-  `class_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '实体类名称',
-  `parent_table` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '关联父表',
-  `parent_table_fk` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '关联父表外键',
-  `status_` char(2) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0' COMMENT '状态 -2 已删除 -1停用 0 正常',
-  `version_` int(11) NULL DEFAULT 0 COMMENT '默认0，必填，离线乐观锁',
-  `description_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
-  `created_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `created_date` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
-  `last_modified_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `last_modified_date` timestamp(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`id_`) USING BTREE,
-  INDEX `gen_table_name`(`name_`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '业务表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of gen_table_t
--- ----------------------------
 INSERT INTO `gen_table_t` VALUES ('34c0ae8ae28b4c66a78b95ab977a4529', 'sys_file_data_t', '文件表', 'FileData', '', '', '0', 0, '', '1', '2018-08-06 17:10:57', '1', '2018-08-06 17:10:57');
-
--- ----------------------------
--- Table structure for gen_template_t
--- ----------------------------
-DROP TABLE IF EXISTS `gen_template_t`;
-CREATE TABLE `gen_template_t`  (
-  `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '编号',
-  `name` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名称',
-  `category` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '分类',
-  `file_path` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '生成文件路径',
-  `file_name` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '生成文件名',
-  `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '内容',
-  `status_` char(2) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0' COMMENT '状态 -2 已删除 -1停用 0 正常',
-  `version_` int(11) NULL DEFAULT 0 COMMENT '默认0，必填，离线乐观锁',
-  `description_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
-  `created_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `created_date` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
-  `last_modified_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `last_modified_date` timestamp(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '代码模板表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for jhi_authority
--- ----------------------------
-DROP TABLE IF EXISTS `jhi_authority`;
-CREATE TABLE `jhi_authority`  (
-  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`name`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for jhi_persistent_audit_event
--- ----------------------------
-DROP TABLE IF EXISTS `jhi_persistent_audit_event`;
-CREATE TABLE `jhi_persistent_audit_event`  (
-  `event_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `principal` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `event_date` timestamp(0) NULL DEFAULT NULL,
-  `event_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`event_id`) USING BTREE,
-  INDEX `idx_persistent_audit_event`(`principal`, `event_date`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 590 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of jhi_persistent_audit_event
--- ----------------------------
 INSERT INTO `jhi_persistent_audit_event` VALUES (263, 'admin', '2017-07-04 17:45:28', 'AUTHENTICATION_SUCCESS');
 INSERT INTO `jhi_persistent_audit_event` VALUES (264, 'admin', '2017-07-05 11:00:41', 'AUTHENTICATION_SUCCESS');
 INSERT INTO `jhi_persistent_audit_event` VALUES (265, 'admin', '2017-07-05 11:02:02', 'AUTHENTICATION_SUCCESS');
@@ -473,23 +271,6 @@ INSERT INTO `jhi_persistent_audit_event` VALUES (578, 'user-jwt-controller', '20
 INSERT INTO `jhi_persistent_audit_event` VALUES (587, 'user-jwt-controller-remember-me', '2018-07-24 09:59:13', 'AUTHENTICATION_SUCCESS');
 INSERT INTO `jhi_persistent_audit_event` VALUES (588, 'user-jwt-controller', '2018-07-24 09:59:14', 'AUTHENTICATION_SUCCESS');
 INSERT INTO `jhi_persistent_audit_event` VALUES (589, 'admin', '2018-07-30 14:35:30', 'AUTHENTICATION_SUCCESS');
-
--- ----------------------------
--- Table structure for jhi_persistent_audit_evt_data
--- ----------------------------
-DROP TABLE IF EXISTS `jhi_persistent_audit_evt_data`;
-CREATE TABLE `jhi_persistent_audit_evt_data`  (
-  `event_id` bigint(20) NOT NULL,
-  `name` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`event_id`, `name`) USING BTREE,
-  INDEX `idx_persistent_audit_evt_data`(`event_id`) USING BTREE,
-  CONSTRAINT `jhi_persistent_audit_evt_data_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `jhi_persistent_audit_event` (`event_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of jhi_persistent_audit_evt_data
--- ----------------------------
 INSERT INTO `jhi_persistent_audit_evt_data` VALUES (263, 'remoteAddress', '0:0:0:0:0:0:0:1');
 INSERT INTO `jhi_persistent_audit_evt_data` VALUES (263, 'sessionId', '0zrBAPPqGkbQQdESYqHTdrYfAAU43pjuM46Ry2_e');
 INSERT INTO `jhi_persistent_audit_evt_data` VALUES (353, 'remoteAddress', '0:0:0:0:0:0:0:1');
@@ -556,97 +337,6 @@ INSERT INTO `jhi_persistent_audit_evt_data` VALUES (489, 'message', 'Bad credent
 INSERT INTO `jhi_persistent_audit_evt_data` VALUES (489, 'type', 'org.springframework.security.authentication.BadCredentialsException');
 INSERT INTO `jhi_persistent_audit_evt_data` VALUES (505, 'message', 'Bad credentials');
 INSERT INTO `jhi_persistent_audit_evt_data` VALUES (505, 'type', 'org.springframework.security.authentication.BadCredentialsException');
-
--- ----------------------------
--- Table structure for jhi_persistent_token
--- ----------------------------
-DROP TABLE IF EXISTS `jhi_persistent_token`;
-CREATE TABLE `jhi_persistent_token`  (
-  `id_` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `series_` varchar(76) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `user_id` bigint(20) NULL DEFAULT NULL,
-  `token_value` varchar(76) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `token_date` date NULL DEFAULT NULL,
-  `ip_address` varchar(39) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `user_agent` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id_`) USING BTREE,
-  INDEX `fk_user_persistent_token`(`user_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for logging_event
--- ----------------------------
-DROP TABLE IF EXISTS `logging_event`;
-CREATE TABLE `logging_event`  (
-  `event_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `timestmp` bigint(20) NOT NULL COMMENT '创建时间',
-  `formatted_message` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '内容',
-  `logger_name` varchar(254) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '名称',
-  `level_string` varchar(254) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '级别',
-  `thread_name` varchar(254) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '线程',
-  `reference_flag` smallint(6) NULL DEFAULT NULL COMMENT '引用标识',
-  `arg0` varchar(254) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '参数0',
-  `arg1` varchar(254) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '参数1',
-  `arg2` varchar(254) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '参数2',
-  `arg3` varchar(254) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '参数3',
-  `caller_filename` varchar(254) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '操作文件',
-  `caller_class` varchar(254) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '操作类名',
-  `caller_method` varchar(254) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '操作方法',
-  `caller_line` char(4) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '操作行',
-  PRIMARY KEY (`event_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '日志表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for logging_event_exception
--- ----------------------------
-DROP TABLE IF EXISTS `logging_event_exception`;
-CREATE TABLE `logging_event_exception`  (
-  `event_id` bigint(20) NOT NULL,
-  `i` smallint(6) NOT NULL,
-  `trace_line` varchar(254) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`event_id`, `i`) USING BTREE,
-  CONSTRAINT `logging_event_exception_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `logging_event` (`event_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for logging_event_property
--- ----------------------------
-DROP TABLE IF EXISTS `logging_event_property`;
-CREATE TABLE `logging_event_property`  (
-  `event_id` bigint(20) NOT NULL,
-  `mapped_key` varchar(254) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `mapped_value` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
-  PRIMARY KEY (`event_id`, `mapped_key`) USING BTREE,
-  CONSTRAINT `logging_event_property_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `logging_event` (`event_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for sys_area_t
--- ----------------------------
-DROP TABLE IF EXISTS `sys_area_t`;
-CREATE TABLE `sys_area_t`  (
-  `id_` int(11) NOT NULL COMMENT '区域id',
-  `parent_ids` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '所有上级区域节点',
-  `parent_id` int(11) NULL DEFAULT NULL COMMENT '上级区域',
-  `name_` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '区域名称',
-  `short_name` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '区域简称',
-  `sort_` int(11) NOT NULL COMMENT '序号',
-  `level_` int(11) NULL DEFAULT NULL COMMENT '区域等级(1省/2市/3区县)',
-  `code_` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '区域编码',
-  `is_leaf` bit(1) NULL DEFAULT b'0' COMMENT '1 叶子节点 0 非叶子节点',
-  `created_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人',
-  `created_date` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
-  `last_modified_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '修改人',
-  `last_modified_date` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
-  `description_` varchar(225) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
-  `status_` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0' COMMENT '状态',
-  `version_` int(11) NOT NULL DEFAULT 0 COMMENT '版本',
-  PRIMARY KEY (`id_`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '区域表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of sys_area_t
--- ----------------------------
 INSERT INTO `sys_area_t` VALUES (1, '', 0, '全国', NULL, 0, 0, NULL, b'0', NULL, NULL, NULL, NULL, NULL, '0', 0);
 INSERT INTO `sys_area_t` VALUES (110000, '1,', 1, '北京市', NULL, 1, 1, NULL, b'0', NULL, '2017-06-30 15:01:29', '1', '2017-06-30 15:01:29', NULL, '0', 4);
 INSERT INTO `sys_area_t` VALUES (110100, '1,110000,', 110000, '市辖区', '', 0, 2, '', b'0', NULL, '2017-06-30 15:01:29', '1', '2017-11-10 14:03:53', '', '0', 9);
@@ -4175,37 +3865,6 @@ INSERT INTO `sys_area_t` VALUES (659001, '1,650000,659000,', 659000, '石河子�
 INSERT INTO `sys_area_t` VALUES (659002, '1,650000,659000,', 659000, '阿拉尔市', NULL, 0, 3, NULL, b'0', NULL, NULL, NULL, '2016-12-14 15:00:13', NULL, '0', 1);
 INSERT INTO `sys_area_t` VALUES (659003, '1,650000,659000,', 659000, '图木舒克市', NULL, 0, 3, NULL, b'0', NULL, NULL, NULL, '2016-12-14 15:00:14', NULL, '0', 1);
 INSERT INTO `sys_area_t` VALUES (659004, '1,650000,659000,', 659000, '五家渠市', NULL, 0, 3, NULL, b'0', NULL, NULL, NULL, '2016-12-14 15:00:14', NULL, '0', 1);
-
--- ----------------------------
--- Table structure for sys_dict_t
--- ----------------------------
-DROP TABLE IF EXISTS `sys_dict_t`;
-CREATE TABLE `sys_dict_t`  (
-  `id_` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '编号',
-  `name_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '字典名称',
-  `parent_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `parent_ids` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `val_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '字典值',
-  `key_` varchar(225) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `code_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '字典唯一编码',
-  `is_leaf` bit(1) NULL DEFAULT b'0' COMMENT '0 叶子节点 1 非叶子节点',
-  `sort_` int(11) NULL DEFAULT 0 COMMENT '排序',
-  `description_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
-  `status_` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0',
-  `show_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '资源文件key',
-  `is_show` bit(1) NULL DEFAULT b'1' COMMENT '0 叶子节点 1 非叶子节点',
-  `version_` int(11) NULL DEFAULT 0,
-  `created_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `created_date` datetime(0) NULL DEFAULT NULL,
-  `last_modified_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `last_modified_date` datetime(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`id_`) USING BTREE,
-  INDEX `val_`(`val_`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of sys_dict_t
--- ----------------------------
 INSERT INTO `sys_dict_t` VALUES ('01738aa7fd884849b2631402b8159ebd', '业务消息', 'a73c99c35bd84d5baea21549c05e9493', '0,1,5ea249bb780348eb8ea6a0efade684a6,a73c99c35bd84d5baea21549c05e9493,', '1', NULL, 'sys_message_type_1', b'1', 0, '', '0', NULL, b'1', 3, '', '2016-12-05 11:31:22', '1', '2016-12-28 17:42:37');
 INSERT INTO `sys_dict_t` VALUES ('04df64d859bc4073ac91a54d6b238501', '一级', '8040c72a95f541a49734bbe1c47547ca', '0,1,5ea249bb780348eb8ea6a0efade684a6,8040c72a95f541a49734bbe1c47547ca,', '1', NULL, 'sys_org_grade_1', b'0', 4, NULL, '0', NULL, b'1', 4, '', '2016-12-05 11:31:22', NULL, NULL);
 INSERT INTO `sys_dict_t` VALUES ('05655dc0210a4dc9840c3a22ab96cee3', '已删除', '36adfd803e3f4b48b6fa829c96b26959', '0,1,5ea249bb780348eb8ea6a0efade684a6,36adfd803e3f4b48b6fa829c96b26959,', '-2', NULL, 'sys_status_delete', b'1', 0, '', '0', NULL, b'0', 7, '', '2016-12-05 11:31:22', '1', '2016-12-29 13:15:08');
@@ -4263,76 +3922,6 @@ INSERT INTO `sys_dict_t` VALUES ('e81024b1d2a24442bbdc551d10250a0b', '正常', '
 INSERT INTO `sys_dict_t` VALUES ('ed6bc6b03a2a4afbbdc9e35957aa0440', '状态', '5ea249bb780348eb8ea6a0efade684a6', '0,1,5ea249bb780348eb8ea6a0efade684a6,', '0', NULL, 'sys_yes_no', b'0', 0, '', '0', NULL, b'1', 2, '', '2016-12-05 11:31:22', NULL, NULL);
 INSERT INTO `sys_dict_t` VALUES ('f64edd136e80465e8d78f66c008aaaf1', '所在机构及以下数据', 'aec4a6b7cfd6475ea0d97714c13003fe', '0,1,5ea249bb780348eb8ea6a0efade684a6,aec4a6b7cfd6475ea0d97714c13003fe,', '2', NULL, 'sys_role_scope_2', b'0', 30, '', '0', NULL, b'1', 5, '', '2016-12-05 11:31:22', NULL, NULL);
 INSERT INTO `sys_dict_t` VALUES ('fcf6a12e6f0e4db98be49a1eefbd5a85', '所在机构数据', 'aec4a6b7cfd6475ea0d97714c13003fe', '0,1,5ea249bb780348eb8ea6a0efade684a6,aec4a6b7cfd6475ea0d97714c13003fe,', '3', NULL, 'sys_role_scope_3', b'0', 20, '', '0', NULL, b'1', 5, '', '2016-12-05 11:31:22', NULL, NULL);
-
--- ----------------------------
--- Table structure for sys_file_data_t
--- ----------------------------
-DROP TABLE IF EXISTS `sys_file_data_t`;
-CREATE TABLE `sys_file_data_t`  (
-  `id_` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `name_` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名称',
-  `path_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '路径',
-  `size_` int(11) NOT NULL COMMENT '大小',
-  `type_` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '类型',
-  `created_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `created_date` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
-  `last_modified_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `last_modified_date` timestamp(0) NULL DEFAULT NULL,
-  `status_` int(11) NULL DEFAULT NULL,
-  `description_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `version_` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`id_`) USING BTREE,
-  UNIQUE INDEX `login`(`size_`) USING BTREE,
-  UNIQUE INDEX `idx_user_login`(`size_`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '文件对象' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for sys_log_login_t
--- ----------------------------
-DROP TABLE IF EXISTS `sys_log_login_t`;
-CREATE TABLE `sys_log_login_t`  (
-  `id_` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0',
-  `staff_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `login_id` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `remote_addr` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `session_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `enter_time` datetime(0) NULL DEFAULT NULL,
-  `leave_time` datetime(0) NULL DEFAULT NULL,
-  `total_time` int(11) NULL DEFAULT NULL,
-  `login_flag` int(11) NULL DEFAULT NULL,
-  `description_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `status_` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0',
-  PRIMARY KEY (`id_`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for sys_log_operate_t
--- ----------------------------
-DROP TABLE IF EXISTS `sys_log_operate_t`;
-CREATE TABLE `sys_log_operate_t`  (
-  `id_` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `title_` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `type_` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0' COMMENT '日志类型 0：接入日志；1：错误日志',
-  `staff_id` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `login_id` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `exception_` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
-  `request_method` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '请求方式',
-  `access_method` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '请求方法',
-  `params_` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `remote_addr` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `permissions` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '权限标识',
-  `time_consuming` int(11) NULL DEFAULT NULL,
-  `request_uri` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '耗时(毫秒)',
-  `user_agent` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `operate_time` datetime(0) NULL DEFAULT NULL COMMENT '操作时间',
-  `operate_des` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `status_` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id_`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of sys_log_operate_t
--- ----------------------------
 INSERT INTO `sys_log_operate_t` VALUES ('0351bed41e0141488d63da97641403c0', '数据模块-我的面板-个人信息-个人信息', '0', '1', 'admin', '', 'GET', 'public java.lang.String com.jqmkj.modules.sys.controller.StaffController.info(com.jqmkj.modules.sys.entity.Staff,org.springframework.ui.Model)', 'tabPageId=jerichotabiframe_0', '0:0:0:0:0:0:0:1', '@org.apache.shiro.authz.annotation.RequiresPermissions(logical=AND, value=[user])', 910, '/a/sys/staff/info', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36', '2016-12-03 17:23:35', NULL, '0');
 INSERT INTO `sys_log_operate_t` VALUES ('07bcd6a77e6a47b2aeceab0c7403f685', '数据模块-系统设置-机构用户-用户管理', '0', '1', 'admin', '', 'GET', 'public java.lang.String com.jqmkj.modules.sys.controller.StaffController.list()', '', '0:0:0:0:0:0:0:1', '@org.apache.shiro.authz.annotation.RequiresPermissions(logical=AND, value=[sys_staff_view])', 24, '/a/sys/staff/', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36', '2016-12-03 17:19:53', NULL, '0');
 INSERT INTO `sys_log_operate_t` VALUES ('0a3d075cf01e41b9834c3ad6137261f6', '数据模块-系统设置-系统管理-字典管理-查看字典', '0', '1', 'admin', '', 'GET', 'public void com.jqmkj.modules.sys.controller.DictController.findTreeData(java.lang.String,java.lang.String,javax.servlet.http.HttpServletResponse)', 'all=', '0:0:0:0:0:0:0:1', '@org.apache.shiro.authz.annotation.RequiresPermissions(logical=AND, value=[sys_dict_view])', 9, '/a/sys/dict/findTreeData', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36', '2016-12-03 17:12:15', NULL, '0');
@@ -4416,24 +4005,6 @@ INSERT INTO `sys_log_operate_t` VALUES ('fc1a5c2c34ab44d0a2adfb6e6faecaa6', '数
 INSERT INTO `sys_log_operate_t` VALUES ('fd438e2d8a6e4514a2ce1375711f4720', '数据模块-系统设置-机构用户-用户管理-查看列表用户', '0', '1', 'admin', '', 'POST', 'public java.lang.String com.jqmkj.modules.sys.controller.StaffController.findList(com.jqmkj.common.domain.PageModel)', 'sortName=&nd=1480756501783&pageNo=1&sortOrder=asc&pageSize=20', '0:0:0:0:0:0:0:1', '@org.apache.shiro.authz.annotation.RequiresPermissions(logical=AND, value=[sys_staff_view])', 66, '/a/sys/staff/findList', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36', '2016-12-03 17:15:02', NULL, '0');
 INSERT INTO `sys_log_operate_t` VALUES ('fdbae5d81a744251a24bcdf27f1eaca8', '数据模块-系统设置-机构用户-用户管理', '0', '1', 'admin', '', 'GET', 'public java.lang.String com.jqmkj.modules.sys.controller.StaffController.list()', '', '0:0:0:0:0:0:0:1', '@org.apache.shiro.authz.annotation.RequiresPermissions(logical=AND, value=[sys_staff_view])', 9, '/a/sys/staff/', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36', '2016-12-03 17:29:18', NULL, '0');
 INSERT INTO `sys_log_operate_t` VALUES ('ffa8b51b448a4a858f2cfcf46bf66075', '数据模块-系统设置-机构用户-区域管理-查看区域', '0', '1', 'admin', '', 'POST', 'public java.lang.String com.jqmkj.modules.sys.controller.AreaController.findList(com.jqmkj.common.domain.PageModel)', 'sortName=&nd=1480756336945&pageNo=1&sortOrder=asc&pageSize=100&queryConditionJson=[{\'fieldName\':\'parentId\',\'operation\':\'=\',\'value\':\'1\'}]', '0:0:0:0:0:0:0:1', '@org.apache.shiro.authz.annotation.RequiresPermissions(logical=AND, value=[sys_area_view])', 808, '/a/sys/area/findList', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36', '2016-12-03 17:12:18', NULL, '0');
-
--- ----------------------------
--- Table structure for sys_message_deal_t
--- ----------------------------
-DROP TABLE IF EXISTS `sys_message_deal_t`;
-CREATE TABLE `sys_message_deal_t`  (
-  `id_` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `message_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0',
-  `staff_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `deal_time` datetime(0) NULL DEFAULT NULL,
-  `version_` int(11) NULL DEFAULT NULL,
-  `status_` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id_`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of sys_message_deal_t
--- ----------------------------
 INSERT INTO `sys_message_deal_t` VALUES ('07d4ff2bf38444f1827b28ab3929c2f9', 'e7f47c0b61464282af7fd6dd51398130', '28ef444985d145879e89ee8a757c9dc8', NULL, NULL, '0');
 INSERT INTO `sys_message_deal_t` VALUES ('08f100a0ce40443a8217e3f5ea306a71', 'e7f47c0b61464282af7fd6dd51398130', '26efce8f247e451b830322269bface41', NULL, NULL, '0');
 INSERT INTO `sys_message_deal_t` VALUES ('0de1187ee2db4b2b8d24bcac577d141f', 'e7f47c0b61464282af7fd6dd51398130', '383d07235e3a4bcb9cf1eb0d15844d57', NULL, NULL, '0');
@@ -4452,71 +4023,9 @@ INSERT INTO `sys_message_deal_t` VALUES ('ee09d960d333468bb2b1aef2bec0ca56', 'a6
 INSERT INTO `sys_message_deal_t` VALUES ('ee6d04983642479ba369648841611844', 'a6327bef6fd64b1087561a0d8d392c33', '2dfb5306b52b46af9544212364c27c13', NULL, NULL, '-2');
 INSERT INTO `sys_message_deal_t` VALUES ('f4e241fc7bb14a82b5a62883224c6d9f', 'd56e63ac4b15463caa8d2f17eba25022', '216ecd201faa429ca8eed65b219a9463', NULL, NULL, '-2');
 INSERT INTO `sys_message_deal_t` VALUES ('fa465da26da147bba4612e75a5e71636', 'a6327bef6fd64b1087561a0d8d392c33', '09471af5826b472790d440e04ab5df5d', NULL, NULL, '-2');
-
--- ----------------------------
--- Table structure for sys_message_t
--- ----------------------------
-DROP TABLE IF EXISTS `sys_message_t`;
-CREATE TABLE `sys_message_t`  (
-  `id_` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0',
-  `type_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `title_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '消息主题',
-  `content_` varchar(4000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `attachment_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `attach_path` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '文件路径',
-  `message_flag` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `sender` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '发件端',
-  `send_time` datetime(0) NULL DEFAULT NULL COMMENT '发送时间',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
-  `reciver` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `deal_time` datetime(0) NULL DEFAULT NULL,
-  `description_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `version_` int(11) NULL DEFAULT NULL,
-  `status_` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id_`) USING BTREE,
-  INDEX `FKFBFB834A7A37E1A2`(`sender`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of sys_message_t
--- ----------------------------
 INSERT INTO `sys_message_t` VALUES ('a6327bef6fd64b1087561a0d8d392c33', '0', 'test', '&lt;p&gt;\r\n	testsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsevvtestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsevvtestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsevvtestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsevvtestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsevvtestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsetestsevv&lt;/p&gt;', NULL, '', '0', '1', '2015-04-20 15:04:54', '2015-04-20 15:04:54', NULL, NULL, NULL, NULL, '-2');
 INSERT INTO `sys_message_t` VALUES ('d56e63ac4b15463caa8d2f17eba25022', '0', '地对地导弹', '&lt;p&gt;\r\n	顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶v&lt;/p&gt;', NULL, '', '0', '1', '2015-04-20 15:04:11', '2015-04-20 15:04:11', NULL, NULL, NULL, NULL, '-2');
 INSERT INTO `sys_message_t` VALUES ('e7f47c0b61464282af7fd6dd51398130', '0', 'testest', '&lt;p&gt;\r\n	&lt;span style=&quot;background-color:lime;&quot;&gt;tsetsetsetsetsetsetsetsetsetsetsetsetsetsetsetsetsetsetsetsetsetsetsetsetsetse&lt;/span&gt;&lt;/p&gt;\r\n&lt;h1&gt;\r\n	&lt;span style=&quot;background-color:lime;&quot;&gt;dfsdfasdfsadfasdfasdf&lt;/span&gt;&lt;/h1&gt;\r\n&lt;p&gt;\r\n	&lt;span style=&quot;background-color:lime;&quot;&gt;dfasdfasdfasdfasd&lt;span style=&quot;background-color:yellow;&quot;&gt;&lt;span style=&quot;font-size:9px;&quot;&gt;sdfasdfasdfasdfsdfad&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;font-size:9px;&quot;&gt;sdfsadfsadfasdfsdfdfda&lt;/span&gt;&lt;/p&gt;', NULL, '', '0', '1', '2015-04-20 16:42:48', '2015-04-20 16:42:48', NULL, NULL, NULL, NULL, '0');
-
--- ----------------------------
--- Table structure for sys_module_t
--- ----------------------------
-DROP TABLE IF EXISTS `sys_module_t`;
-CREATE TABLE `sys_module_t`  (
-  `id_` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '模块编码',
-  `name_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '名称',
-  `parent_id` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '父module的id',
-  `parent_ids` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `type_` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '模块类型  0 菜单模块 1权限模块',
-  `microservice_` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `permission_` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '权限标识',
-  `component_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `sort_` int(11) NULL DEFAULT 0 COMMENT '排序',
-  `target_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `url_` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `request_method` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '请求方法',
-  `status_` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '是否删除  0正常 1不可用',
-  `icon_cls` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `show_type` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0' COMMENT '针对顶层菜单，0 普通展示下级菜单， 1已树形结构展示',
-  `description_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
-  `version_` int(11) NOT NULL,
-  `is_leaf` bit(1) NULL DEFAULT b'0' COMMENT '1 叶子节点 0 非叶子节点',
-  `created_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `created_date` datetime(0) NULL DEFAULT NULL,
-  `last_modified_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `last_modified_date` datetime(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`id_`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'module表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of sys_module_t
--- ----------------------------
 INSERT INTO `sys_module_t` VALUES ('024d876a23424ff397c224de2e2939a8', '生成方案配置', 'ee5224dc13404267acfb8fc443dee4c3', '4d32c49cc7f448dcbfb92ce9c4dde058,2d5f2af5e36349b5bb8dfbd5904900c8,ee5224dc13404267acfb8fc443dee4c3,', '1', 'jqmkjbootcloudmicro/api', 'gen_genScheme', NULL, 10, '', '/gen/genScheme/', NULL, '0', 'fa-reddit-square', '0', '', 9, b'1', '', '2016-12-05 11:29:48', NULL, NULL);
 INSERT INTO `sys_module_t` VALUES ('0771998f75b444f8b2ec0631c69c644f', '字典管理', '3566c3b5c4114f77a5434c175b9f64c5', '4d32c49cc7f448dcbfb92ce9c4dde058,fc987e00a31246aea6d2e2a6afe8db36,3566c3b5c4114f77a5434c175b9f64c5,', '1', 'jqmkjbootcloudmicro/api', 'sys_dict', NULL, 30, '', '/sys/dict/', 'GET', '0', 'fa-navicon', '0', '', 0, b'0', '1', '2016-12-29 14:27:37', '1', '2016-12-29 14:50:38');
 INSERT INTO `sys_module_t` VALUES ('08bb2278416a4aaa86a1db7898252791', '编辑', '0771998f75b444f8b2ec0631c69c644f', '4d32c49cc7f448dcbfb92ce9c4dde058,fc987e00a31246aea6d2e2a6afe8db36,3566c3b5c4114f77a5434c175b9f64c5,0771998f75b444f8b2ec0631c69c644f,', '2', NULL, 'sys_dict_edit', NULL, 40, NULL, '/sys/dict/edit', 'GET,POST', '0', 'fa-pencil', '0', NULL, 0, b'1', '1', '2016-12-29 14:27:37', '1', '2016-12-29 14:27:37');
@@ -4533,7 +4042,7 @@ INSERT INTO `sys_module_t` VALUES ('3ce73e592a8f46d38618a996c29ef863', '编辑',
 INSERT INTO `sys_module_t` VALUES ('3dc743ff54734668b45a95dd02276de5', '锁定', '0771998f75b444f8b2ec0631c69c644f', '4d32c49cc7f448dcbfb92ce9c4dde058,fc987e00a31246aea6d2e2a6afe8db36,3566c3b5c4114f77a5434c175b9f64c5,0771998f75b444f8b2ec0631c69c644f,', '2', NULL, 'sys_dict_lock', NULL, 60, NULL, '/sys/dict/lock', 'POST', '0', 'fa-lock', '0', NULL, 0, b'1', '1', '2016-12-29 14:27:37', '1', '2016-12-29 14:27:37');
 INSERT INTO `sys_module_t` VALUES ('42baef661e504fa998a35d27b0daa3c4', '账户预览', 'fd8be39d8db44c60917633defe9996c0', '4d32c49cc7f448dcbfb92ce9c4dde058,fd8be39d8db44c60917633defe9996c0,', '1', NULL, 'user', NULL, 30, '_top', '/index', 'GET', '0', 'fa-leaf', '0', '', 5, b'0', '', '2016-12-05 11:29:48', '1', '2017-06-30 15:00:51');
 INSERT INTO `sys_module_t` VALUES ('4715e01a290c447eac93ee47db6b9c81', '资源管理', 'fc987e00a31246aea6d2e2a6afe8db36', '4d32c49cc7f448dcbfb92ce9c4dde058,fc987e00a31246aea6d2e2a6afe8db36,', '1', NULL, '', NULL, 30, '', '', NULL, '0', 'fa-book', '0', '', 19, b'0', '', '2016-12-05 11:29:48', '1', '2018-08-06 17:11:27');
-INSERT INTO `sys_module_t` VALUES ('4d32c49cc7f448dcbfb92ce9c4dde058', '数据模块', '', '', '1', NULL, 'root', NULL, 30, NULL, NULL, NULL, '0', ' fa-reorder', '0', NULL, 10, b'0', '', '2016-12-05 11:29:48', '1', '2017-06-30 15:00:51');
+INSERT INTO `sys_module_t` VALUES ('4d32c49cc7f448dcbfb92ce9c4dde058', '数据模块', '0', '', '1', NULL, 'root', NULL, 30, NULL, NULL, NULL, '0', ' fa-reorder', '0', NULL, 10, b'0', '', '2016-12-05 11:29:48', '1', '2017-06-30 15:00:51');
 INSERT INTO `sys_module_t` VALUES ('5293bd1a28924276a236a4363af5dde8', '启用/停用机构', 'ce4517a441dc4115a14921419b4d131a', '4d32c49cc7f448dcbfb92ce9c4dde058,fc987e00a31246aea6d2e2a6afe8db36,714afd9e5d9f4c0697e502a43a4a2491,ce4517a441dc4115a14921419b4d131a,', '2', NULL, 'sys_org_lock', NULL, 60, '', '/sys/org/lock', 'POST', '0', '', '0', '', 19, b'0', '', '2016-12-05 11:29:48', '1', '2017-06-30 15:01:12');
 INSERT INTO `sys_module_t` VALUES ('590e0f70d9e9408499cbfed1c02cdd84', '锁定', 'e1f8b38201064edaaf72398851c752b7', '4d32c49cc7f448dcbfb92ce9c4dde058,fc987e00a31246aea6d2e2a6afe8db36,3566c3b5c4114f77a5434c175b9f64c5,e1f8b38201064edaaf72398851c752b7,', '2', NULL, 'sys_taskScheduleJob_lock', NULL, 60, NULL, '/sys/taskScheduleJob/lock', 'POST', '0', 'fa-lock', '0', NULL, 0, b'1', '1', '2017-01-23 09:55:09', '1', '2017-01-23 09:55:09');
 INSERT INTO `sys_module_t` VALUES ('714afd9e5d9f4c0697e502a43a4a2491', '机构用户', 'fc987e00a31246aea6d2e2a6afe8db36', '4d32c49cc7f448dcbfb92ce9c4dde058,fc987e00a31246aea6d2e2a6afe8db36,', '1', NULL, '', NULL, 0, '', '', NULL, '0', 'fa-dot-circle-o', '0', '', 11, b'0', '', '2016-12-05 11:29:48', '1', '2017-06-30 15:01:11');
@@ -4574,192 +4083,24 @@ INSERT INTO `sys_module_t` VALUES ('fcf49184c1854cc8958e4bb6de7b15b5', '业务�
 INSERT INTO `sys_module_t` VALUES ('fd8be39d8db44c60917633defe9996c0', '账户中心', '4d32c49cc7f448dcbfb92ce9c4dde058', '4d32c49cc7f448dcbfb92ce9c4dde058,', '1', NULL, '', NULL, 10, '', '', NULL, '0', 'fa-gear', '0', '', 15, b'0', '', '2016-12-05 11:29:48', '1', '2017-06-30 15:00:51');
 INSERT INTO `sys_module_t` VALUES ('fe5dcdbcc132480da84701173a3fb5f2', '查看', '201305b309b0462ab8eb294ab1d42410', '4d32c49cc7f448dcbfb92ce9c4dde058,fc987e00a31246aea6d2e2a6afe8db36,714afd9e5d9f4c0697e502a43a4a2491,201305b309b0462ab8eb294ab1d42410,', '2', NULL, 'sys_user_view', NULL, 20, NULL, '/sys/user/page', 'GET', '0', 'fa-info-circle', '0', NULL, 1, b'1', '1', '2016-12-29 14:54:14', '1', '2017-06-30 15:01:12');
 INSERT INTO `sys_module_t` VALUES ('fefd0f584dba4a68975712194c366492', '查看', '7646a936058c4742992e30e261f1549c', '4d32c49cc7f448dcbfb92ce9c4dde058,fc987e00a31246aea6d2e2a6afe8db36,4715e01a290c447eac93ee47db6b9c81,7646a936058c4742992e30e261f1549c,', '2', NULL, 'sys_fileData_view', NULL, 20, NULL, '/sys/fileData/page', 'GET', '0', 'fa-info-circle', '0', NULL, 0, b'1', '1', '2018-08-06 17:11:27', '1', '2018-08-06 17:11:27');
-
--- ----------------------------
--- Table structure for sys_org_t
--- ----------------------------
-DROP TABLE IF EXISTS `sys_org_t`;
-CREATE TABLE `sys_org_t`  (
-  `id_` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0',
-  `name_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `parent_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `parent_ids` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `code_` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '机构编码',
-  `grade_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '机构等级',
-  `is_leaf` bit(1) NULL DEFAULT b'0' COMMENT '1 叶子节点 0 非叶子节点',
-  `en_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `sort_` int(11) NULL DEFAULT 0 COMMENT '序号',
-  `type_` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '组织类型',
-  `status_` int(11) NULL DEFAULT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `created_date` datetime(0) NULL DEFAULT NULL,
-  `last_modified_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `last_modified_date` datetime(0) NULL DEFAULT NULL,
-  `version_` int(11) NULL DEFAULT NULL,
-  `description_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id_`) USING BTREE,
-  INDEX `FK2006A5E73CA88251`(`parent_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of sys_org_t
--- ----------------------------
 INSERT INTO `sys_org_t` VALUES ('1', '平台', '0', '0,', '100000', '1', b'0', 'root', 30, '1', 0, '', '2016-12-12 16:32:48', '1', '2018-07-11 14:31:01', 9, NULL);
--- INSERT INTO `sys_org_t` VALUES ('14e596870e0f4ab59d64e1d5e1a4a403', '立架班组（上导）', '186eaa340c934cb49434765f807fdeff', '0,1,186eaa340c934cb49434765f807fdeff,', '', '2', b'1', NULL, 60, '2', -2, '1', '2018-07-11 15:34:40', '1', '2018-07-17 13:34:02', 2, '');
--- INSERT INTO `sys_org_t` VALUES ('186eaa340c934cb49434765f807fdeff', '两当隧道左线', '1', '0,1,', '100000', '1', b'0', NULL, 10, '1', -2, '', '2016-12-12 16:32:48', '1', '2018-07-17 13:34:02', 9, '');
--- INSERT INTO `sys_org_t` VALUES ('27db8e3b19364a279b1e9721b5a784c7', '人事部', '38c65b8630ff473aa9f618906401efa0', '0,1,38c65b8630ff473aa9f618906401efa0,', '100005', '1', b'1', NULL, 20, '1', -2, '', '2016-12-12 16:32:48', '1', '2018-07-11 14:26:37', 1, '');
--- INSERT INTO `sys_org_t` VALUES ('38c65b8630ff473aa9f618906401efa0', '综合部', '1', '0,1,', '100004', '1', b'0', NULL, 0, '1', -2, '', '2016-12-12 16:32:48', '1', '2018-07-11 14:26:37', 3, '');
--- INSERT INTO `sys_org_t` VALUES ('40cd4e7d47114a2a89ee6c3bc02e374d', '对对对', '38c65b8630ff473aa9f618906401efa0', '0,1,38c65b8630ff473aa9f618906401efa0,', '方法', '2', b'1', NULL, 80, '1', -2, '1', '2017-11-08 17:13:18', '1', '2017-11-08 17:17:03', 3, '');
--- INSERT INTO `sys_org_t` VALUES ('4e75509816c94e5f80237bb7f15132c1', '开挖班组（上导）', '186eaa340c934cb49434765f807fdeff', '0,1,186eaa340c934cb49434765f807fdeff,', '', '2', b'1', NULL, 30, '2', -2, '1', '2018-07-11 14:32:27', '1', '2018-07-17 13:34:02', 1, '');
--- INSERT INTO `sys_org_t` VALUES ('588e010702d343fe9082416102e49def', 'fdsa', 'c5fe48b99ad24e83a2271405a43fb8b7', '0,1,c5fe48b99ad24e83a2271405a43fb8b7,', 'dsfas', '1', b'1', NULL, 0, '1', -2, '', '2016-12-12 16:32:48', '1', '2017-06-30 16:40:02', 1, '');
--- INSERT INTO `sys_org_t` VALUES ('5a9a987f7e4a4f9ca58c63645e5b6aab', '陕口隧道进口左线', '1', '0,1,', '100003', '1', b'1', NULL, 40, '1', -2, '1', '2018-07-11 14:30:09', '1', '2018-07-17 13:34:09', 3, '');
--- INSERT INTO `sys_org_t` VALUES ('c4f84e7695d94b469d93405fb73060d0', 'dd', '38c65b8630ff473aa9f618906401efa0', '0,1,38c65b8630ff473aa9f618906401efa0,', '', '1', b'1', NULL, 30, '1', -2, '', '2017-03-02 22:23:11', '1', '2017-06-30 16:39:57', 1, '');
--- INSERT INTO `sys_org_t` VALUES ('c5fe48b99ad24e83a2271405a43fb8b7', '陕口隧道进口右线', '1', '0,1,', '100004', '1', b'1', NULL, 60, '1', -2, '', '2016-12-12 16:32:48', '1', '2018-07-17 13:34:07', 4, '');
--- INSERT INTO `sys_org_t` VALUES ('f2b3397b79684d69b10a090b4f415844', '出渣班组', '186eaa340c934cb49434765f807fdeff', '0,1,186eaa340c934cb49434765f807fdeff,', '', '2', b'1', NULL, 60, '2', -2, '1', '2018-07-11 15:30:58', '1', '2018-07-17 13:34:02', 3, '');
--- INSERT INTO `sys_org_t` VALUES ('f93883513a034577a166b424beb93794', '两当隧道右线', '1', '0,1,', '100001', '1', b'1', NULL, 30, '1', -2, '', '2016-12-12 16:32:48', '1', '2018-07-17 13:34:00', 3, '');
-
--- ----------------------------
--- Table structure for sys_role_module_t
--- ----------------------------
-DROP TABLE IF EXISTS `sys_role_module_t`;
-CREATE TABLE `sys_role_module_t`  (
-  `role_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `module_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`role_id`, `module_id`) USING BTREE,
-  INDEX `FK_6eloh5l1ylo4pteqj5n1viu3c`(`module_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of sys_role_module_t
--- ----------------------------
+INSERT INTO `sys_org_t` VALUES ('14e596870e0f4ab59d64e1d5e1a4a403', '立架班组（上导）', '186eaa340c934cb49434765f807fdeff', '0,1,186eaa340c934cb49434765f807fdeff,', '', '2', b'1', NULL, 60, '2', -2, '1', '2018-07-11 15:34:40', '1', '2018-07-17 13:34:02', 2, '');
+INSERT INTO `sys_org_t` VALUES ('186eaa340c934cb49434765f807fdeff', '两当隧道左线', '1', '0,1,', '100000', '1', b'0', NULL, 10, '1', -2, '', '2016-12-12 16:32:48', '1', '2018-07-17 13:34:02', 9, '');
+INSERT INTO `sys_org_t` VALUES ('27db8e3b19364a279b1e9721b5a784c7', '人事部', '38c65b8630ff473aa9f618906401efa0', '0,1,38c65b8630ff473aa9f618906401efa0,', '100005', '1', b'1', NULL, 20, '1', -2, '', '2016-12-12 16:32:48', '1', '2018-07-11 14:26:37', 1, '');
+INSERT INTO `sys_org_t` VALUES ('38c65b8630ff473aa9f618906401efa0', '综合部', '1', '0,1,', '100004', '1', b'0', NULL, 0, '1', -2, '', '2016-12-12 16:32:48', '1', '2018-07-11 14:26:37', 3, '');
+INSERT INTO `sys_org_t` VALUES ('40cd4e7d47114a2a89ee6c3bc02e374d', '对对对', '38c65b8630ff473aa9f618906401efa0', '0,1,38c65b8630ff473aa9f618906401efa0,', '方法', '2', b'1', NULL, 80, '1', -2, '1', '2017-11-08 17:13:18', '1', '2017-11-08 17:17:03', 3, '');
+INSERT INTO `sys_org_t` VALUES ('4e75509816c94e5f80237bb7f15132c1', '开挖班组（上导）', '186eaa340c934cb49434765f807fdeff', '0,1,186eaa340c934cb49434765f807fdeff,', '', '2', b'1', NULL, 30, '2', -2, '1', '2018-07-11 14:32:27', '1', '2018-07-17 13:34:02', 1, '');
+INSERT INTO `sys_org_t` VALUES ('588e010702d343fe9082416102e49def', 'fdsa', 'c5fe48b99ad24e83a2271405a43fb8b7', '0,1,c5fe48b99ad24e83a2271405a43fb8b7,', 'dsfas', '1', b'1', NULL, 0, '1', -2, '', '2016-12-12 16:32:48', '1', '2017-06-30 16:40:02', 1, '');
+INSERT INTO `sys_org_t` VALUES ('5a9a987f7e4a4f9ca58c63645e5b6aab', '陕口隧道进口左线', '1', '0,1,', '100003', '1', b'1', NULL, 40, '1', -2, '1', '2018-07-11 14:30:09', '1', '2018-07-17 13:34:09', 3, '');
+INSERT INTO `sys_org_t` VALUES ('c4f84e7695d94b469d93405fb73060d0', 'dd', '38c65b8630ff473aa9f618906401efa0', '0,1,38c65b8630ff473aa9f618906401efa0,', '', '1', b'1', NULL, 30, '1', -2, '', '2017-03-02 22:23:11', '1', '2017-06-30 16:39:57', 1, '');
+INSERT INTO `sys_org_t` VALUES ('c5fe48b99ad24e83a2271405a43fb8b7', '陕口隧道进口右线', '1', '0,1,', '100004', '1', b'1', NULL, 60, '1', -2, '', '2016-12-12 16:32:48', '1', '2018-07-17 13:34:07', 4, '');
+INSERT INTO `sys_org_t` VALUES ('f2b3397b79684d69b10a090b4f415844', '出渣班组', '186eaa340c934cb49434765f807fdeff', '0,1,186eaa340c934cb49434765f807fdeff,', '', '2', b'1', NULL, 60, '2', -2, '1', '2018-07-11 15:30:58', '1', '2018-07-17 13:34:02', 3, '');
+INSERT INTO `sys_org_t` VALUES ('f93883513a034577a166b424beb93794', '两当隧道右线', '1', '0,1,', '100001', '1', b'1', NULL, 30, '1', -2, '', '2016-12-12 16:32:48', '1', '2018-07-17 13:34:00', 3, '');
 INSERT INTO `sys_role_module_t` VALUES ('43186a6c08d247c098ea357e28cc75f4', '4d32c49cc7f448dcbfb92ce9c4dde058');
-
--- ----------------------------
--- Table structure for sys_role_org_t
--- ----------------------------
-DROP TABLE IF EXISTS `sys_role_org_t`;
-CREATE TABLE `sys_role_org_t`  (
-  `role_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0',
-  `org_id` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  PRIMARY KEY (`role_id`, `org_id`) USING BTREE,
-  INDEX `FK4C18BAB12A44C67D`(`org_id`) USING BTREE,
-  INDEX `FK4C18BAB1B90B46FD`(`role_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for sys_role_t
--- ----------------------------
-DROP TABLE IF EXISTS `sys_role_t`;
-CREATE TABLE `sys_role_t`  (
-  `id_` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0',
-  `name_` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `org_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `sys_data` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '是否系统数据',
-  `data_scope` int(11) NULL DEFAULT NULL COMMENT '数据范围',
-  `status_` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '是否删除  0正常 1不可用',
-  `sort_` int(11) NULL DEFAULT 0 COMMENT '序号',
-  `type_` varchar(225) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '对应activiti中的group表',
-  `en_` varchar(225) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `description_` varchar(225) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `version_` int(11) NULL DEFAULT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `created_date` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
-  `last_modified_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `last_modified_date` timestamp(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`id_`) USING BTREE,
-  INDEX `FKE5C4B49D852279D7`(`org_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of sys_role_t
--- ----------------------------
 INSERT INTO `sys_role_t` VALUES ('43186a6c08d247c098ea357e28cc75f4', '管理员', '1', '1', 1, '0', 0, NULL, NULL, '', 6, '', '2017-11-23 21:25:41', '1', '2017-11-23 21:25:42');
-
--- ----------------------------
--- Table structure for sys_task_schedule_job_t
--- ----------------------------
-DROP TABLE IF EXISTS `sys_task_schedule_job_t`;
-CREATE TABLE `sys_task_schedule_job_t`  (
-  `id_` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `name_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名称',
-  `group_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '分组',
-  `job_status` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '任务状态',
-  `cron_expression` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'cron表达式',
-  `bean_class` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '任务执行时调用哪个类的方法 包名+类名',
-  `is_concurrent` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '任务是否有状态',
-  `spring_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'spring bean',
-  `source_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `method_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '任务调用的方法名',
-  `method_params` varchar(512) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `created_date` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
-  `last_modified_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `last_modified_date` timestamp(0) NULL DEFAULT NULL,
-  `status_` int(11) NULL DEFAULT NULL,
-  `description_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `version_` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`id_`) USING BTREE,
-  UNIQUE INDEX `name_group`(`name_`, `group_`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '计划任务表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of sys_task_schedule_job_t
--- ----------------------------
 INSERT INTO `sys_task_schedule_job_t` VALUES ('e864d607c3374f059903eb037c46c49c', 'sample', 'test', '0', '*/5 * * * * ?', '', '1', 'sampleService', '', 'hello', '', '1', '2017-02-15 14:30:11', '1', '2017-06-30 15:01:25', 0, '', 1);
-
--- ----------------------------
--- Table structure for sys_user_role_t
--- ----------------------------
-DROP TABLE IF EXISTS `sys_user_role_t`;
-CREATE TABLE `sys_user_role_t`  (
-  `user_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `role_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`user_id`, `role_id`) USING BTREE,
-  INDEX `FK_k7q8xbl92flmkhwupf64o6ii5`(`role_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of sys_user_role_t
--- ----------------------------
 INSERT INTO `sys_user_role_t` VALUES ('2', '43186a6c08d247c098ea357e28cc75f4');
 INSERT INTO `sys_user_role_t` VALUES ('5', '43186a6c08d247c098ea357e28cc75f4');
 INSERT INTO `sys_user_role_t` VALUES ('fff43e1b172544e890a86f7b38fe6138', '43186a6c08d247c098ea357e28cc75f4');
-
--- ----------------------------
--- Table structure for sys_user_t
--- ----------------------------
-DROP TABLE IF EXISTS `sys_user_t`;
-CREATE TABLE `sys_user_t`  (
-  `id_` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `org_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `avatar_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `login_id` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `password_hash` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `name_` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `email_` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `phone_` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `type_` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'system' COMMENT '类型',
-  `key_` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `lang_key` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `property_` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `reset_key` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `reset_date` timestamp(0) NULL DEFAULT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `created_date` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
-  `last_modified_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `last_modified_date` timestamp(0) NULL DEFAULT NULL,
-  `status_` int(11) NULL DEFAULT NULL,
-  `description_` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `version_` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`id_`) USING BTREE,
-  UNIQUE INDEX `login`(`login_id`) USING BTREE,
-  UNIQUE INDEX `idx_user_login`(`login_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of sys_user_t
--- ----------------------------
 INSERT INTO `sys_user_t` VALUES ('1', NULL, NULL, 'admin', '$2a$10$yzm.Oakr.ai8838lBlXqOOlj9kKvdR8HtaPT91I9Pw6kYiFB8yjKm', 'Administrator', 'admin@localhost', NULL, 'system', NULL, 'zh-cn', NULL, NULL, NULL, 'system', '2018-07-17 13:14:36', 'system', NULL, 0, NULL, 0);
 INSERT INTO `sys_user_t` VALUES ('2', '1', '/2018/7/18/848cd05dcb714d96b262b97fd54e2ddb.jpg', 'mange', '$2a$10$yzm.Oakr.ai8838lBlXqOOlj9kKvdR8HtaPT91I9Pw6kYiFB8yjKm', '李武', 'anonymous@localhost1', '', 'system', '', 'zh-cn', NULL, '07101724038444399296', '2018-07-18 17:00:54', 'system', '2018-07-17 13:14:38', '1', '2018-07-18 17:00:54', 0, '<p>fdsfg</p>', 17);
-
-SET FOREIGN_KEY_CHECKS = 1;

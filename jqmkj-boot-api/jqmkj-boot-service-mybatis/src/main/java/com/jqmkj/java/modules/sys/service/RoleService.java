@@ -53,9 +53,10 @@ public class RoleService extends DataVoService<RoleRepository, Role, String, Rol
         if(role!=null){
             role.setOrg(orgRepository.selectById(role.getOrgId()));
         }
+        List<Module> modules = moduleRepository.selectListByRoleId(role.getId());
+        System.out.println("modules="+modules);
         role.setModuleIdList(
-                Collections3.extractToList(moduleRepository.selectListByRoleId(role.getId()),
-                        Module.F_ID));
+                Collections3.extractToList(modules, Module.F_ID));
         role.setOrgIdList(
                 Collections3.extractToList(orgRepository.selectListByRoleId(role.getId()),
                         Org.F_ID));
@@ -84,10 +85,12 @@ public class RoleService extends DataVoService<RoleRepository, Role, String, Rol
 
     @Override
     public void save(RoleVo roleVo) {
+        //System.out.println("roleVo="+roleVo.getModuleIdList());
         Role role = PublicUtil.isNotEmpty(roleVo.getId()) ? repository.selectById(roleVo.getId()) : new Role();
         copyVoToBean(roleVo, role);
         role = super.save(role);
         if (PublicUtil.isNotEmpty(role.getModuleIdList())) {
+            //System.out.println("role.getModuleIdList()="+role.getModuleIdList());
             repository.deleteRoleModules(role.getId());
             repository.addRoleModules(role);
         }

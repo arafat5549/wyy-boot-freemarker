@@ -19,7 +19,7 @@ import java.util.List;
 public class ModuleVo extends TreeEntityVo {
 
     public static final String F_PERMISSION = "permission";
-    public static final String ROOT_ID = "4d32c49cc7f448dcbfb92ce9c4dde058";
+    public static final String ROOT_ID = "191";//"4d32c49cc7f448dcbfb92ce9c4dde058";
 
     private static final long serialVersionUID = 1L;
 

@@ -13,7 +13,7 @@
         <ul class="page-sidebar-menu" data-keep-expanded="false"
             data-auto-scroll="true" data-slide-speed="200">
         <#list  SecurityUtil.getModuleList()! as moduleParent>
-            <#if (moduleParent.parentId)! == '4d32c49cc7f448dcbfb92ce9c4dde058' >
+            <#if (moduleParent.parentId)! == '191' ><!-- 4d32c49cc7f448dcbfb92ce9c4dde058 -->
                 <#if moduleParent.url !=''>
                     <li class='nav-item ${(moduleParent_index == 0)!?string("start", "")}'>
                         <a href="#${(moduleParent.hrefName)! }" data-url-name="${(moduleParent.hrefName)! }"

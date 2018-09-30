@@ -13,7 +13,7 @@ public class IdEntity<T extends BaseEntity, PK extends Serializable> extends Dat
 
     private static final long serialVersionUID = 1L;
     @SearchField
-    @TableId(value = GeneralEntity.F_SQL_ID, type = IdType.UUID)
+    @TableId(value = GeneralEntity.F_SQL_ID, type = IdType.AUTO)
     protected PK id; // 编号
 
     public IdEntity() {

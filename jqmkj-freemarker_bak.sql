@@ -4605,18 +4605,18 @@ CREATE TABLE `sys_org_t`  (
 -- Records of sys_org_t
 -- ----------------------------
 INSERT INTO `sys_org_t` VALUES ('1', '平台', '0', '0,', '100000', '1', b'0', 'root', 30, '1', 0, '', '2016-12-12 16:32:48', '1', '2018-07-11 14:31:01', 9, NULL);
--- INSERT INTO `sys_org_t` VALUES ('14e596870e0f4ab59d64e1d5e1a4a403', '立架班组（上导）', '186eaa340c934cb49434765f807fdeff', '0,1,186eaa340c934cb49434765f807fdeff,', '', '2', b'1', NULL, 60, '2', -2, '1', '2018-07-11 15:34:40', '1', '2018-07-17 13:34:02', 2, '');
--- INSERT INTO `sys_org_t` VALUES ('186eaa340c934cb49434765f807fdeff', '两当隧道左线', '1', '0,1,', '100000', '1', b'0', NULL, 10, '1', -2, '', '2016-12-12 16:32:48', '1', '2018-07-17 13:34:02', 9, '');
--- INSERT INTO `sys_org_t` VALUES ('27db8e3b19364a279b1e9721b5a784c7', '人事部', '38c65b8630ff473aa9f618906401efa0', '0,1,38c65b8630ff473aa9f618906401efa0,', '100005', '1', b'1', NULL, 20, '1', -2, '', '2016-12-12 16:32:48', '1', '2018-07-11 14:26:37', 1, '');
--- INSERT INTO `sys_org_t` VALUES ('38c65b8630ff473aa9f618906401efa0', '综合部', '1', '0,1,', '100004', '1', b'0', NULL, 0, '1', -2, '', '2016-12-12 16:32:48', '1', '2018-07-11 14:26:37', 3, '');
--- INSERT INTO `sys_org_t` VALUES ('40cd4e7d47114a2a89ee6c3bc02e374d', '对对对', '38c65b8630ff473aa9f618906401efa0', '0,1,38c65b8630ff473aa9f618906401efa0,', '方法', '2', b'1', NULL, 80, '1', -2, '1', '2017-11-08 17:13:18', '1', '2017-11-08 17:17:03', 3, '');
--- INSERT INTO `sys_org_t` VALUES ('4e75509816c94e5f80237bb7f15132c1', '开挖班组（上导）', '186eaa340c934cb49434765f807fdeff', '0,1,186eaa340c934cb49434765f807fdeff,', '', '2', b'1', NULL, 30, '2', -2, '1', '2018-07-11 14:32:27', '1', '2018-07-17 13:34:02', 1, '');
--- INSERT INTO `sys_org_t` VALUES ('588e010702d343fe9082416102e49def', 'fdsa', 'c5fe48b99ad24e83a2271405a43fb8b7', '0,1,c5fe48b99ad24e83a2271405a43fb8b7,', 'dsfas', '1', b'1', NULL, 0, '1', -2, '', '2016-12-12 16:32:48', '1', '2017-06-30 16:40:02', 1, '');
--- INSERT INTO `sys_org_t` VALUES ('5a9a987f7e4a4f9ca58c63645e5b6aab', '陕口隧道进口左线', '1', '0,1,', '100003', '1', b'1', NULL, 40, '1', -2, '1', '2018-07-11 14:30:09', '1', '2018-07-17 13:34:09', 3, '');
--- INSERT INTO `sys_org_t` VALUES ('c4f84e7695d94b469d93405fb73060d0', 'dd', '38c65b8630ff473aa9f618906401efa0', '0,1,38c65b8630ff473aa9f618906401efa0,', '', '1', b'1', NULL, 30, '1', -2, '', '2017-03-02 22:23:11', '1', '2017-06-30 16:39:57', 1, '');
--- INSERT INTO `sys_org_t` VALUES ('c5fe48b99ad24e83a2271405a43fb8b7', '陕口隧道进口右线', '1', '0,1,', '100004', '1', b'1', NULL, 60, '1', -2, '', '2016-12-12 16:32:48', '1', '2018-07-17 13:34:07', 4, '');
--- INSERT INTO `sys_org_t` VALUES ('f2b3397b79684d69b10a090b4f415844', '出渣班组', '186eaa340c934cb49434765f807fdeff', '0,1,186eaa340c934cb49434765f807fdeff,', '', '2', b'1', NULL, 60, '2', -2, '1', '2018-07-11 15:30:58', '1', '2018-07-17 13:34:02', 3, '');
--- INSERT INTO `sys_org_t` VALUES ('f93883513a034577a166b424beb93794', '两当隧道右线', '1', '0,1,', '100001', '1', b'1', NULL, 30, '1', -2, '', '2016-12-12 16:32:48', '1', '2018-07-17 13:34:00', 3, '');
+INSERT INTO `sys_org_t` VALUES ('14e596870e0f4ab59d64e1d5e1a4a403', '立架班组（上导）', '186eaa340c934cb49434765f807fdeff', '0,1,186eaa340c934cb49434765f807fdeff,', '', '2', b'1', NULL, 60, '2', -2, '1', '2018-07-11 15:34:40', '1', '2018-07-17 13:34:02', 2, '');
+INSERT INTO `sys_org_t` VALUES ('186eaa340c934cb49434765f807fdeff', '两当隧道左线', '1', '0,1,', '100000', '1', b'0', NULL, 10, '1', -2, '', '2016-12-12 16:32:48', '1', '2018-07-17 13:34:02', 9, '');
+INSERT INTO `sys_org_t` VALUES ('27db8e3b19364a279b1e9721b5a784c7', '人事部', '38c65b8630ff473aa9f618906401efa0', '0,1,38c65b8630ff473aa9f618906401efa0,', '100005', '1', b'1', NULL, 20, '1', -2, '', '2016-12-12 16:32:48', '1', '2018-07-11 14:26:37', 1, '');
+INSERT INTO `sys_org_t` VALUES ('38c65b8630ff473aa9f618906401efa0', '综合部', '1', '0,1,', '100004', '1', b'0', NULL, 0, '1', -2, '', '2016-12-12 16:32:48', '1', '2018-07-11 14:26:37', 3, '');
+INSERT INTO `sys_org_t` VALUES ('40cd4e7d47114a2a89ee6c3bc02e374d', '对对对', '38c65b8630ff473aa9f618906401efa0', '0,1,38c65b8630ff473aa9f618906401efa0,', '方法', '2', b'1', NULL, 80, '1', -2, '1', '2017-11-08 17:13:18', '1', '2017-11-08 17:17:03', 3, '');
+INSERT INTO `sys_org_t` VALUES ('4e75509816c94e5f80237bb7f15132c1', '开挖班组（上导）', '186eaa340c934cb49434765f807fdeff', '0,1,186eaa340c934cb49434765f807fdeff,', '', '2', b'1', NULL, 30, '2', -2, '1', '2018-07-11 14:32:27', '1', '2018-07-17 13:34:02', 1, '');
+INSERT INTO `sys_org_t` VALUES ('588e010702d343fe9082416102e49def', 'fdsa', 'c5fe48b99ad24e83a2271405a43fb8b7', '0,1,c5fe48b99ad24e83a2271405a43fb8b7,', 'dsfas', '1', b'1', NULL, 0, '1', -2, '', '2016-12-12 16:32:48', '1', '2017-06-30 16:40:02', 1, '');
+INSERT INTO `sys_org_t` VALUES ('5a9a987f7e4a4f9ca58c63645e5b6aab', '陕口隧道进口左线', '1', '0,1,', '100003', '1', b'1', NULL, 40, '1', -2, '1', '2018-07-11 14:30:09', '1', '2018-07-17 13:34:09', 3, '');
+INSERT INTO `sys_org_t` VALUES ('c4f84e7695d94b469d93405fb73060d0', 'dd', '38c65b8630ff473aa9f618906401efa0', '0,1,38c65b8630ff473aa9f618906401efa0,', '', '1', b'1', NULL, 30, '1', -2, '', '2017-03-02 22:23:11', '1', '2017-06-30 16:39:57', 1, '');
+INSERT INTO `sys_org_t` VALUES ('c5fe48b99ad24e83a2271405a43fb8b7', '陕口隧道进口右线', '1', '0,1,', '100004', '1', b'1', NULL, 60, '1', -2, '', '2016-12-12 16:32:48', '1', '2018-07-17 13:34:07', 4, '');
+INSERT INTO `sys_org_t` VALUES ('f2b3397b79684d69b10a090b4f415844', '出渣班组', '186eaa340c934cb49434765f807fdeff', '0,1,186eaa340c934cb49434765f807fdeff,', '', '2', b'1', NULL, 60, '2', -2, '1', '2018-07-11 15:30:58', '1', '2018-07-17 13:34:02', 3, '');
+INSERT INTO `sys_org_t` VALUES ('f93883513a034577a166b424beb93794', '两当隧道右线', '1', '0,1,', '100001', '1', b'1', NULL, 30, '1', -2, '', '2016-12-12 16:32:48', '1', '2018-07-17 13:34:00', 3, '');
 
 -- ----------------------------
 -- Table structure for sys_role_module_t
@@ -4759,7 +4759,7 @@ CREATE TABLE `sys_user_t`  (
 -- ----------------------------
 -- Records of sys_user_t
 -- ----------------------------
-INSERT INTO `sys_user_t` VALUES ('1', NULL, NULL, 'admin', '$2a$10$yzm.Oakr.ai8838lBlXqOOlj9kKvdR8HtaPT91I9Pw6kYiFB8yjKm', 'Administrator', 'admin@localhost', NULL, 'system', NULL, 'zh-cn', NULL, NULL, NULL, 'system', '2018-07-17 13:14:36', 'system', NULL, 0, NULL, 0);
-INSERT INTO `sys_user_t` VALUES ('2', '1', '/2018/7/18/848cd05dcb714d96b262b97fd54e2ddb.jpg', 'mange', '$2a$10$yzm.Oakr.ai8838lBlXqOOlj9kKvdR8HtaPT91I9Pw6kYiFB8yjKm', '李武', 'anonymous@localhost1', '', 'system', '', 'zh-cn', NULL, '07101724038444399296', '2018-07-18 17:00:54', 'system', '2018-07-17 13:14:38', '1', '2018-07-18 17:00:54', 0, '<p>fdsfg</p>', 17);
+INSERT INTO `sys_user_t` VALUES ('1', NULL, NULL, 'admin', '$2a$10$LqPGl3Eg4y8Y18cg8ZmBZ.neox2ldzwYOUl7kpGhhL0F8Q80gev5W', 'Administrator', 'admin@localhost', NULL, 'system', NULL, 'zh-cn', NULL, NULL, NULL, 'system', '2018-07-17 13:14:36', 'system', NULL, 0, NULL, 0);
+INSERT INTO `sys_user_t` VALUES ('2', '1', '/2018/7/18/848cd05dcb714d96b262b97fd54e2ddb.jpg', 'mange', '$2a$10$j8S5d7Sr7.8VTOYNviDPOeWX8KcYILUVJBsYV83Y5NtECayypx9lO', '李武', 'anonymous@localhost1', '', 'system', '', 'zh-cn', NULL, '07101724038444399296', '2018-07-18 17:00:54', 'system', '2018-07-17 13:14:38', '1', '2018-07-18 17:00:54', 0, '<p>fdsfg</p>', 17);
 
 SET FOREIGN_KEY_CHECKS = 1;

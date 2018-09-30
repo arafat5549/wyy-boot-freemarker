@@ -51,7 +51,9 @@
         insert into sys_role_org_t (role_id, org_id)
         values
         <foreach collection="orgIdList" item="item" separator=",">
-            (#{id},#{item})
+            <if test="item != null and item !='' ">
+                (#{id},#{item})
+            </if>
         </foreach>
     </select>
 
@@ -63,7 +65,9 @@
         insert into sys_role_module_t (role_id, module_id)
         values
         <foreach collection="moduleIdList" item="item" separator=",">
-            (#{id},#{item})
+            <if test="item != null and item !='' ">
+                (#{id},#{item})
+            </if>
         </foreach>
     </select>
     <select id="deleteRoleModules">
